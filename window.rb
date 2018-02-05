@@ -26,9 +26,15 @@ class Window < Gosu::Window
     # la méthode draw prend 3 paramètres :
     # - abcisse
     # - ordonnée
-    # - profondeur
+    # - profondur
     @background_image.draw(0, 0, 0)
     @player.draw
+
+  end
+
+  def update
+    close if Gosu::button_down?(Gosu::KbEscape)
+
 
   end
 end

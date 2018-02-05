@@ -17,4 +17,10 @@ class Window < Gosu::Window
     # - profondeur
     @background_image.draw(0, 0, 0)
   end
+
+  def update
+    close if Gosu::button_down?(Gosu::KbEscape)
+
+
+  end
 end

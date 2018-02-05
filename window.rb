@@ -14,7 +14,7 @@ class Window < Gosu::Window
     # la méthode draw prend 3 paramètres :
     # - abcisse
     # - ordonnée
-    # - profondeur
+    # - profondur
     @background_image.draw(0, 0, 0)
   end
 end

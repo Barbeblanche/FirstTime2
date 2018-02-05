@@ -6,10 +6,15 @@ class Window < Gosu::Window
     # appel au constructeur de la classe Gosu::Window
     super
     # nom de la fenetre
-    @background_image = Gosu::Image.new("image/image.jpg")
-    @player = Player.new(width, height)
     self.caption = "First Time"
+    @background_image = Gosu::Image.new("image/image.jpg")
+    @player = Player.new(width/2,height/2)
+    @song = Gosu::Song.new("song/qadc.mp3")
+    @song.volume = 0.25
+    @song.play(true)
+
   end
+
   def update
       # FAIRE fonction SI indiceTouchePressée EST touche
       @player.go_left if Gosu::button_down?(Gosu::KbLeft)
@@ -32,9 +37,5 @@ class Window < Gosu::Window
 
   end
 
-  def update
-    close if Gosu::button_down?(Gosu::KbEscape)
 
-
-  end
 end

@@ -9,7 +9,7 @@ class Player
     @velocityX = 0.0
     @velocityY = 0.0
     #image du personnage
-    @image = Gosu::Image.new("image/perso.png")
+    @image = Gosu::Image.new("image/sss.png")
   end
 
   def draw

@@ -35,6 +35,7 @@ class Window < Gosu::Window
     @background_image.draw(0, 0, 0)
     @player.draw
 
+
   end
 
 

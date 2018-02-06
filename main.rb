@@ -1,13 +1,12 @@
-require 'gosu_tiled'
 require 'gosu'
 
 
 require_relative 'window'
-require_relative 'ZOrder'
+require_relative 'tiles'
 require_relative 'player'
-
-WindowWidth = 736
-WindowHeight = 416
+require_relative 'map'
+WindowWidth = 900
+WindowHeight = 400
 
 Window = Window.new(WindowWidth, WindowHeight)
 Window.show

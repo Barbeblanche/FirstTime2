@@ -43,8 +43,11 @@ class Player
         not @map.solid?(@x + offs_x + 15, @y + offs_y) and
           not @map.solid?(@x + offs_x - 15, @y + offs_y) and
             not @map.solid?(@x + offs_x - 15, @y + offs_y - 45) and
-              not @map.solid?(@x + offs_x + 15, @y + offs_y - 45) 
-                 #not collide?(@x, @y)
+              not @map.solid?(@x + offs_x + 15, @y + offs_y - 45) and
+                 not collide?(@oiseau.x, @oiseau.y) and
+                    not collide?(@oiseau.x+36, @oiseau.y) and
+                      not collide?(@oiseau.x, @oiseau.y+30) and
+                        not collide?(@oiseau.x+36, @oiseau.y+30)
   end
 
 
@@ -90,16 +93,16 @@ class Player
   end
 
   def try_to_jump
-    if @map.solid?(@x, @y + 1)
+    if @map.solid?(@x, @y + 1) 
       @vy = -20 #hauteur du saut
     end
 
   end
-  #def collide?(x,y)
-  #distance = Gosu::distance(x, y,
-  #                          @oiseau.x, @oiseau.y)
-  #distance < DistanceOfCollision
-  #end
+  def collide?(x,y)
+  distance = Gosu::distance(@x, @y,
+                            x, y)
+  distance < DistanceOfCollision
+  end
 
   #def glissade(i)
 

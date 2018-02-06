@@ -1,26 +1,31 @@
 class Enemy
   attr_reader :x, :y
   def initialize(map,type)
-    @velocity = Gosu::random(5.5, 6.5)
+    @velocity = Gosu::random(3.5, 5.0)
 
     @map = map
 
     @image = Gosu::Image.new("image/o1.png")
     @oiseau2 = Gosu::Image.new("image/o2.png")
     @oiseau3 = Gosu::Image.new("image/o3.png")
-
+    @test = "droit"
     @x = Gosu::random(200.0,300.0)
     @y = Gosu::random(50.0,150.0)
     @pos_cour = @image
   end
 
   def update
-    if @map.solid?(@x,@y)
+    if @map.solid?(@x+36,@y) || @test == "gauche"
       @x -= @velocity
-    else
-      @x += @velocity
+      @test = "gauche"
+      @pos_cour = (Gosu.milliseconds / 175 % 2 == 0) ? @oiseau3 : @oiseau2
     end
-    @pos = (Gosu.milliseconds / 175 % 2 == 0) ? @oiseau2 : @oiseau3
+    if @map.solid?(@x,@y) || @test=="droit"
+      @x += @velocity
+      @test="droit"
+      @pos_cour = (Gosu.milliseconds / 175 % 2 == 0) ? @oiseau2 : @oiseau3
+    end
+
 
   end
   def draw

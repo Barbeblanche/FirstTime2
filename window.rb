@@ -9,7 +9,7 @@ class Window < Gosu::Window
   def initialize(width, height)
     super WIDTH, HEIGHT
 
-    @background = Gosu::Image.new("image/space.png", :tileable => true)
+    @background = Gosu::Image.new("image/sky.jpg", :tileable => true)
     @map = Map.new("cptn_ruby_map.txt")
     @player = Player.new(@map, 400, 100)
     # The scrolling position is stored as top left corner of the screen.

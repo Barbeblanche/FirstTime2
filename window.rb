@@ -11,10 +11,19 @@ class Window < Gosu::Window
     super WIDTH, HEIGHT
 
     @background = Gosu::Image.new("image/sky.jpg", :tileable => true)
+    #creation d'un array pour stocker les noms des maps et faire un choix de level random
+    @maps = ["maps/test.txt", "maps/test1.txt"]
+    @item = @maps[rand(@maps.length)]
 
-    @map = Map.new("cptn_ruby_map.txt")
-    @enemy = Enemy.new(@map,"oiseau")
+    @map = Map.new(@item)
+    2.times do
+      @enemy = Enemy.new(@map,"oiseau")
+    end
     @player = Player.new(@enemy,@map, 400, 100)
+
+    @music = Gosu::Song.new("song/miami.mp3")
+    @music.volume = 0.25
+    @music.play(true)
 
     # The scrolling position is stored as top left corner of the screen.
     @camera_x = @camera_y = 0
@@ -54,5 +63,8 @@ class Window < Gosu::Window
       super
     end
   end
+
+
+
 
 end

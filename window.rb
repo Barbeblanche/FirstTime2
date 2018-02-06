@@ -12,6 +12,7 @@ class Window < Gosu::Window
     @background = Gosu::Image.new("image/sky.jpg", :tileable => true)
     @map = Map.new("cptn_ruby_map.txt")
     @player = Player.new(@map, 400, 100)
+    @enemy = Enemy.new("oiseau")
     # The scrolling position is stored as top left corner of the screen.
     @camera_x = @camera_y = 0
   end
@@ -34,6 +35,7 @@ class Window < Gosu::Window
     Gosu.translate(-@camera_x, -@camera_y) do
       @map.draw
       @player.draw
+      @enemy.draw
     end
 
   end

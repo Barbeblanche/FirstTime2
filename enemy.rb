@@ -1,6 +1,6 @@
 class Enemy
   def initialize(type)
-  @image=Gosu::Image.new("")
+  @image=Gosu::Image.new("image/o2")
   @velocity = Gosu::random(0.8, 3.3)
 
   @x = rand * (WindowWidth - @image.width)

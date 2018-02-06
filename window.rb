@@ -2,6 +2,7 @@
 require_relative 'map'
 require_relative 'player'
 require_relative 'tiles'
+require_relative 'enemy'
 WIDTH, HEIGHT = 900, 480
 class Window < Gosu::Window
 
@@ -12,6 +13,7 @@ class Window < Gosu::Window
     @background = Gosu::Image.new("image/sky.jpg", :tileable => true)
     @map = Map.new("cptn_ruby_map.txt")
     @player = Player.new(@map, 400, 100)
+    @enemy = Enemy.new()
     # The scrolling position is stored as top left corner of the screen.
     @camera_x = @camera_y = 0
   end

@@ -15,6 +15,22 @@ class Window < Gosu::Window
 
   end
 
+
+    class Tile
+  # tile.rb
+    attr_reader :position
+
+    def initialize(tileset, tile_pos, collidable: false)
+      @image = tileset[tile_pos]
+      @position = tile_pos
+      @collidable = collidable
+    end
+
+    def collidable?
+      @collidable
+    end
+  end
+
   def update
       # FAIRE fonction SI indiceTouchePressée EST touche
       @player.go_left if Gosu::button_down?(Gosu::KbLeft)

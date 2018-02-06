@@ -11,9 +11,11 @@ class Window < Gosu::Window
     super WIDTH, HEIGHT
 
     @background = Gosu::Image.new("image/sky.jpg", :tileable => true)
+
     @map = Map.new("cptn_ruby_map.txt")
-    @player = Player.new(@map, 400, 100)
-    @enemy = Enemy.new("oiseau")
+    @enemy = Enemy.new(@map,"oiseau")
+    @player = Player.new(@enemy,@map, 400, 100)
+
     # The scrolling position is stored as top left corner of the screen.
     @camera_x = @camera_y = 0
   end
@@ -29,6 +31,7 @@ class Window < Gosu::Window
     # Scrolling follows player
     @camera_x = [[@player.x - WIDTH / 2, 0].max, @map.width * 50 - WIDTH].min
     @camera_y = [[@player.y - HEIGHT / 2, 0].max, @map.height * 50 - HEIGHT].min
+    @enemy.update
   end
 
   def draw

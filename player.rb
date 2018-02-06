@@ -3,13 +3,13 @@ require 'gosu'
 
 class Player
   attr_reader :x, :y
-
-  def initialize(map, x, y)
+  DistanceOfCollision =5
+  def initialize(oiseau,map, x, y)
     @x, @y = x, y
     @dir = :left
     @vy = 0 # Vertical velocity
     @map = map
-
+    @oiseau = oiseau
     # Load all animation frames
     @debout = Gosu::Image.new("image/1.png")
     @marche1 = Gosu::Image.new("image/2.png")
@@ -43,7 +43,8 @@ class Player
         not @map.solid?(@x + offs_x + 15, @y + offs_y) and
           not @map.solid?(@x + offs_x - 15, @y + offs_y) and
             not @map.solid?(@x + offs_x - 15, @y + offs_y - 45) and
-              not @map.solid?(@x + offs_x + 15, @y + offs_y - 45)
+              not @map.solid?(@x + offs_x + 15, @y + offs_y - 45) 
+                 #not collide?(@x, @y)
   end
 
 
@@ -94,6 +95,11 @@ class Player
     end
 
   end
+  #def collide?(x,y)
+  #distance = Gosu::distance(x, y,
+  #                          @oiseau.x, @oiseau.y)
+  #distance < DistanceOfCollision
+  #end
 
   #def glissade(i)
 

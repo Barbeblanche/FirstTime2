@@ -1,10 +1,10 @@
+require_relative 'enemy'
 class Map
   attr_reader :width, :height, :gems
 
   def initialize(filename)
     # Load 60x60 tiles, 5px overlap in all four directions.
     @tileset = Gosu::Image.load_tiles("image/tile2.png", 50, 50, :tileable => true)
-
     #gem_img = Gosu::Image.new("media/gem.png")
     #@gems = []
 
@@ -47,5 +47,6 @@ class Map
   # Solid at a given pixel position?
   def solid?(x, y)
     y < 0 || @tiles[x / 50][y / 50]
+
   end
 end

@@ -6,35 +6,40 @@ class Window < Gosu::Window
     # appel au constructeur de la classe Gosu::Window
     super
     # nom de la fenetre
-    @background_image = Gosu::Image.new("image/image.jpg")
-    @player = Player.new(width, height)
+    @background_image = Gosu::Image.new("image/map.png")
+    @player = Player.new(width/2, height/2)
+    @jump = true
+    @jumpy = 25
+    @camera_x = @camera_y = 0
     self.caption = "First Time"
   end
   def update
       # FAIRE fonction SI indiceTouchePressée EST touche
-      @player.go_left if Gosu::button_down?(Gosu::KbLeft)
-      @player.go_right if Gosu::button_down?(Gosu::KbRight)
-      @player.go_up if Gosu::button_down?(Gosu::KbUp)
-      @player.go_down if Gosu::button_down?(Gosu::KbDown)
-      # la fonction move est appelée dans tous les cas
-      @player.move
-      # fermer la fenêtre si la touche pressée est Echap
-      close if Gosu::button_down?(Gosu::KbEscape)
-    end
 
+      if Gosu::button_down?(Gosu::KbUp) and @jump
+        @jump=false
+        @player.jump(@jumpy)
+
+      end
+      # la fonction move est appelée dans tous les cas
+      @player.update(@jumpy)
+      # fermer la fenêtre si la touche pressée est Echap
+    end
+  def button_up(id)
+      if id == Gosu::KbUp
+        @jump = true
+      end
+      super
+    end
   def draw
     # la méthode draw prend 3 paramètres :
     # - abcisse
     # - ordonnée
     # - profondur
-    @background_image.draw(0, 0, 0)
+    @background_image.draw(0, 0, ZOrder::Background)
     @player.draw
 
   end
 
-  def update
-    close if Gosu::button_down?(Gosu::KbEscape)
 
-
-  end
 end

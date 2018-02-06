@@ -18,12 +18,11 @@ class Window < Gosu::Window
 
   def update
     move_x = 0
-    i = 0
     move_x -= 5 if Gosu.button_down? Gosu::KB_LEFT
     move_x += 5 if Gosu.button_down? Gosu::KB_RIGHT
     #i = 1 if Gosu.button_down? Gosu::KB_DOWN
 
-    @player.update(move_x,i)
+    @player.update(move_x)
   #  @cptn.collect_gems(@map.gems)
     # Scrolling follows player
     @camera_x = [[@player.x - WIDTH / 2, 0].max, @map.width * 50 - WIDTH].min

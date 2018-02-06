@@ -3,33 +3,59 @@ require 'gosu'
 
 class Player
   attr_reader :x, :y
-  # constructeur
-  def initialize(map,x, y)
-    # coordonnées
-    @x = x
-    @y = y
-    #position de depart : orienté vers la gauche
+
+  def initialize(map, x, y)
+    @x, @y = x, y
     @dir = :left
-    # vitesse (de base 0 : à l'arret)
-    @vy = 0.0
-    #image du personnage
+    @vy = 0 # Vertical velocity
+    @map = map
+
+    # Load all animation frames
     @debout = Gosu::Image.new("image/1.png")
     @marche1 = Gosu::Image.new("image/2.png")
     @marche2 = Gosu::Image.new("image/3.png")
     @jump = Gosu::Image.new("image/saut.png")
-    #@gliss = Gosu::Image.new("image/glissade.png")
-    @map = map
-    @pos_dep = @debout
+    #@walk3d = Gosu::Image.new("media/4.png")
+    #@walk4d = Gosu::Image.new("media/5.png")
+    # This always points to the frame that is currently drawn.
+    # This is set in update, and used in draw.
+    @pos_cour = @debout
   end
-  def update(move_x,i)
+
+  def draw
+    # Flip vertically when facing to the left.
+    if @dir == :left
+      offs_x = -25
+      factor = 1.0
+    else
+      offs_x = 25
+      factor = -1.0
+    end
+
+    @pos_cour.draw(@x + offs_x, @y-42, 0, factor, 1.0)
+  end
+
+  # Could the object be placed at x + offs_x/y + offs_y without being stuck?
+  def would_fit(offs_x, offs_y)
+    # Check at the center/top and center/bottom for map collisions
+    not @map.solid?(@x + offs_x, @y + offs_y) and
+      not @map.solid?(@x + offs_x, @y + offs_y - 45) and
+        not @map.solid?(@x + offs_x + 15, @y + offs_y) and
+          not @map.solid?(@x + offs_x - 15, @y + offs_y) and
+            not @map.solid?(@x + offs_x - 15, @y + offs_y - 45) and
+              not @map.solid?(@x + offs_x + 15, @y + offs_y - 45)
+  end
+
+
+  def update(move_x)
     # Select image depending on action
     if (move_x == 0)
-      @pos_dep = @debout
+      @pos_cour = @debout
     else
-      @pos_dep = (Gosu.milliseconds / 175 % 2 == 0) ? @marche1 : @marche2
+      @pos_cour = (Gosu.milliseconds / 175 % 2 == 0) ? @marche1 : @marche2
     end
     if (@vy > 0)
-      @pos_dep = @jump
+      @pos_cour = @jump
     end
     #if (i==1)
     #  @cur_image = @gliss
@@ -62,32 +88,25 @@ class Player
     end
   end
 
-  def check_jump
+  def try_to_jump
     if @map.solid?(@x, @y + 1)
       @vy = -20 #hauteur du saut
     end
+
   end
 
-  # Definit les collisions
-  def hitbox(offs_x, offs_y)
-    # Check at the center/top and center/bottom for map collisions
-    not @map.solid?(@x + offs_x, @y + offs_y) and
-      not @map.solid?(@x + offs_x, @y + offs_y - 45) and
-        not @map.solid?(@x + offs_x + 15, @y + offs_y) and
-          not @map.solid?(@x + offs_x - 15, @y + offs_y) and
-            not @map.solid?(@x + offs_x - 15, @y + offs_y - 45) and
-              not @map.solid?(@x + offs_x + 15, @y + offs_y - 45)
-  end
+  #def glissade(i)
 
-  def draw
-    # Flip vertically when facing to the left.
-    if @dir == :left
-      offs_x = -25 #-25 et 25 sont les espaces quand il se retourne (miroir)
-      factor = 1.0
-    else
-      offs_x = 25
-      factor = -1.0
-    end
-    @cur_image.draw(@x + offs_x, @y-42, 0, factor, 1.0)
-  end
+    #  if i == 1
+
+
+
+# end
+
+#  def collect_gems(gems)
+    # Same as in the tutorial game.
+  #  gems.reject! do |c|
+  #    (c.x - @x).abs < 50 and (c.y - @y).abs < 50
+  #  end
+#  end
 end

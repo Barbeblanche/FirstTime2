@@ -1,4 +1,4 @@
-require 'gosu_tiled'
+#require 'gosu_tiled'
 require 'gosu'
 
 

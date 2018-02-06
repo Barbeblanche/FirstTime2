@@ -16,6 +16,9 @@ class Window < Gosu::Window
   def update
       # FAIRE fonction SI indiceTouchePressée EST touche
 
+
+      close if Gosu::button_down?(Gosu::KbEscape)
+
       if Gosu::button_down?(Gosu::KbUp) and @jump
         @jump=false
         @player.jump(@jumpy)

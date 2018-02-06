@@ -10,12 +10,8 @@ class Player
     @velocityY = 0.0
     @down_y =0.0
     #image du personnage
-<<<<<<< HEAD
     @image = Gosu::Image.new("image/perso3.png")
     @allow = true
-=======
-    @image = Gosu::Image.new("image/sss.png")
->>>>>>> 0bbb2b2da634b54578d005c8ae5637e049a05957
   end
   def update (jump_max)
     go_left if Gosu::button_down?(Gosu::KbLeft)

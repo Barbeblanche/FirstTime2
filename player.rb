@@ -90,7 +90,7 @@ class Player
 
   def try_to_jump
     if @map.solid?(@x, @y + 1)
-      @vy = -20 #hauteur du saut
+      @vy = -21 #hauteur du saut
     end
 
   end

@@ -12,8 +12,8 @@ class Enemy
     @oiseau2r = Gosu::Image.new("image/o2r.png")
     @oiseau3r = Gosu::Image.new("image/o3r.png")
     @test = "droit"
-    @x = Gosu::random(200.0,300.0)
-    @y = Gosu::random(50.0,150.0)
+    @x = Gosu::random(51.0,849.0)
+    @y = Gosu::random(51.0,4900.0)
     @pos_cour = @image
   end
 

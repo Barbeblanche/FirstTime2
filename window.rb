@@ -18,9 +18,13 @@ class Window < Gosu::Window
     @coeur = Gosu::Image.new("image/coeurplein.png")
     @coeurvide = Gosu::Image.new("image/coeur.png")
     @vie = 3
-    @map = Map.new("maps/test.txt")
-    @enemy = Enemy.new(@map,"oiseau")
-    @player = Player.new(@map, 400, 100)
+    @map = Map.new("maps/map.txt")
+    @enemy = []
+    100.times do
+      @enemy.push(Enemy.new(@map,"oiseau"))
+    end
+
+    @player = Player.new(@map, 100, 99*50-1)
 
     @test = "p"
     @music = Gosu::Song.new("song/miami.mp3")
@@ -32,8 +36,8 @@ class Window < Gosu::Window
   end
 
   def update
-    @rect1 =  [@player.x, @player.y, 40, 36]
-    @rect2 = [@enemy.x,@enemy.y,50, 40]
+    #@rect1 =  [@player.x, @player.y, 40, 36]
+    #@rect2 = [@enemy.each(&:x),@enemy.each(&:y),50, 40]
     move_x = 0
     move_x -= 5 if Gosu.button_down? Gosu::KB_LEFT
     move_x += 5 if Gosu.button_down? Gosu::KB_RIGHT
@@ -44,17 +48,17 @@ class Window < Gosu::Window
     # Scrolling follows player
     @camera_x = [[@player.x - WIDTH / 2, 0].max, @map.width * 50 - WIDTH].min
     @camera_y = [[@player.y - HEIGHT / 2, 0].max, @map.height * 50 - HEIGHT].min
-    @enemy.update
+    @enemy.each(&:update)
   end
 
   def draw
     @background.draw 0, 0, 0
-    if (@rect1[0] < @rect2[0] + @rect2[2] &&
-       @rect1[0] + @rect1[2] >  @rect2[0] &&
-       @rect1[1] < @rect2[1] +  @rect2[3] &&
-       @rect1[3] + @rect1[1] > @rect2[1])
-       @vie -=1
-    end
+    #if (@rect1[0] < @rect2[0] + @rect2[2] &&
+    #   @rect1[0] + @rect1[2] >  @rect2[0] &&
+    #   @rect1[1] < @rect2[1] +  @rect2[3] &&
+    #   @rect1[3] + @rect1[1] > @rect2[1])
+    #   @vie -=1
+    #end
     if @vie==3
       @coeur.draw(0,0,0)
       @coeur.draw(50,0,0)
@@ -73,7 +77,7 @@ class Window < Gosu::Window
     Gosu.translate(-@camera_x, -@camera_y) do
       @map.draw
       @player.draw
-      @enemy.draw
+      @enemy.each(&:draw)
     end
 
   end

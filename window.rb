@@ -39,9 +39,7 @@ class Window < Gosu::Window
     @camera_x = @camera_y = 0
   end
 
-  def needs_cursor?
-  true
-end
+
 
   def update
     move_x = 0

@@ -39,11 +39,11 @@ class Player
   def would_fit(offs_x, offs_y)
     # Check at the center/top and center/bottom for map collisions
     not @map.solid?(@x + offs_x, @y + offs_y) and
-      not @map.solid?(@x + offs_x, @y + offs_y - 45) and
-        not @map.solid?(@x + offs_x + 15, @y + offs_y) and
-          not @map.solid?(@x + offs_x - 15, @y + offs_y) and
-            not @map.solid?(@x + offs_x - 15, @y + offs_y - 45) and
-              not @map.solid?(@x + offs_x + 15, @y + offs_y - 45) #and
+      not @map.solid?(@x + offs_x, @y + offs_y - 40) and
+        not @map.solid?(@x + offs_x + 10, @y + offs_y) and
+          not @map.solid?(@x + offs_x -10, @y + offs_y) and
+            not @map.solid?(@x + offs_x +10, @y + offs_y - 40) and
+              not @map.solid?(@x + offs_x-10, @y + offs_y - 40) #and
   end
 
 

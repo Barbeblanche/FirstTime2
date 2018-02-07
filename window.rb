@@ -16,7 +16,7 @@ class Window < Gosu::Window
     @item = @maps[rand(@maps.length)]
     @coeur = Gosu::Image.new("image/coeur.png")
     @vie = 2
-    @map = Map.new(@item)
+    @map = Map.new("maps/test1.txt")
     @enemy = []
     @player = Player.new(@map, 400, 100)
     5.times do

@@ -21,7 +21,7 @@ class Enemy
   end
 
   def update
-    if @map.solid?(@x+36,@y) and @map.solid?(@x+36,@y+30) || @test == "gauche"
+    if @map.solid?(@x+36,@y) || @map.solid?(@x+36,@y+30) || @test == "gauche"
       @x -= @velocity
       @test = "gauche"
       @pos_cour = (Gosu.milliseconds / 175 % 2 == 0) ? @oiseau3r : @oiseau2r

@@ -1,5 +1,6 @@
 require_relative 'bouton'
 require_relative 'window'
+require_relative 'instr'
 class Menu< Gosu::Window
   def initialize(widht, height,window)
     super WIDTH, HEIGHT
@@ -44,6 +45,8 @@ class Menu< Gosu::Window
           when (580..670)
             @bout2 = Bouton.new(@btncommandes2,130,580,580,90)
             if button_down?(Gosu::MsLeft)
+              @instr = Instr.new(WIDTH,HEIGHT,Menu)
+              @instr.show
             end
           else
             @bout2 = Bouton.new(@btncommandes,130,580,580,90)
@@ -73,7 +76,7 @@ class Menu< Gosu::Window
             end
           end
 
-          
+
    end
    def needs_cursor?
    true

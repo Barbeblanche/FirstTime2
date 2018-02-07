@@ -10,6 +10,8 @@ require_relative 'menu'
 WIDTH, HEIGHT = 721, 1280
 class Window < Gosu::Window
 
+  attr_accessor :jeu
+
   # constructeur de la classe Window
   def initialize(width, height)
     super WIDTH, HEIGHT
@@ -31,7 +33,7 @@ class Window < Gosu::Window
     end
 
 
-
+    @jeu=self
 
     @music = Gosu::Song.new("song/miami.mp3")
     @music.volume = 1

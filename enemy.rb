@@ -1,12 +1,11 @@
 require_relative 'player'
 class Enemy
-  attr_accessor :x, :y, :vie
+  attr_accessor :x, :y
   TPS = 500
   def initialize(map,type,player)
     @velocity = Gosu::random(3.5, 5.0)
     @tps_ecoule = 0
     @map = map
-    @vie = 3
     @player = player
     @image = Gosu::Image.new("image/o1.png")
     @oiseau2 = Gosu::Image.new("image/o2.png")
@@ -22,7 +21,7 @@ class Enemy
   end
 
   def update
-    if @map.solid?(@x+36,@y) || @test == "gauche"
+    if @map.solid?(@x+36,@y) and @map.solid?(@x+36,@y+30) || @test == "gauche"
       @x -= @velocity
       @test = "gauche"
       @pos_cour = (Gosu.milliseconds / 175 % 2 == 0) ? @oiseau3r : @oiseau2r
@@ -44,8 +43,8 @@ class Enemy
      @rect1[1] < @rect2[1] +  @rect2[3] and
      @rect1[3] + @rect1[1] > @rect2[1])
      if Gosu.milliseconds-@tps_ecoule >= TPS
-       @vie -=1
-       @player.set_vie(@vie)
+       @player.vie -=1
+       @player.set_vie(@player.vie)
        @tps_ecoule = Gosu.milliseconds
      end
   end

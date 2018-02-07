@@ -11,6 +11,7 @@ require_relative 'porte'
 require_relative 'potion'
 WindowWidth = 721
 WindowHeight = 1280
-
 Window = Window.new(WindowWidth, WindowHeight)
-Window.show
+Menu = Menu.new(WindowWidth, WindowHeight,Window)
+
+Menu.show

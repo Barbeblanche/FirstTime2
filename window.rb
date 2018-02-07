@@ -5,6 +5,8 @@ require_relative 'tiles'
 require_relative 'enemy'
 require_relative 'potion'
 require_relative 'porte'
+require_relative 'quit'
+require_relative 'menu'
 WIDTH, HEIGHT = 721, 1280
 class Window < Gosu::Window
 
@@ -18,13 +20,13 @@ class Window < Gosu::Window
     @item = @maps[rand(@maps.length)]
     @coeur = Gosu::Image.new("image/coeurplein.png")
     @coeurvide = Gosu::Image.new("image/coeur.png")
-    @map = Map.new("maps/map.txt")
+    @map = Map.new("maps/test1.txt")
     @player = Player.new(@map, 100, 99*50-1)
     @enemy = []
     @i = @map.potion.length - 1
     @nbPotion = @map.potion.length
 
-    50.times do
+    20.times do
       @enemy.push(Enemy.new(@map,"oiseau",@player))
     end
 
@@ -46,6 +48,7 @@ class Window < Gosu::Window
     move_x -= 5 if Gosu.button_down? Gosu::KB_LEFT
     move_x += 5 if Gosu.button_down? Gosu::KB_RIGHT
     #i = 1 if Gosu.button_down? Gosu::KB_DOWN
+
 
     @player.update(move_x)
     @player.collect_potion(@map.potion)
@@ -103,7 +106,8 @@ class Window < Gosu::Window
       @player.try_to_jump
 
     when Gosu::KB_ESCAPE
-      close
+      @menuquit = Quit.new(WIDTH,HEIGHT,Menu)
+      @menuquit.show if Gosu.button_down? Gosu::KB_ESCAPE
     else
       super
     end

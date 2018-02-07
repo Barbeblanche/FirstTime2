@@ -72,6 +72,8 @@ class Menu< Gosu::Window
               @bout4 = Bouton.new(@btnquitter,220,780,290,80)
             end
           end
+
+          
    end
    def needs_cursor?
    true

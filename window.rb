@@ -15,7 +15,8 @@ class Window < Gosu::Window
     @maps = ["maps/test.txt", "maps/test1.txt"]
     @item = @maps[rand(@maps.length)]
 
-    @map = Map.new(@item)
+    @map= Map.new("maps/test1.txt")
+    #@map = Map.new(@item)
     @enemy = []
     @player = Player.new(@map, 400, 100)
     5.times do

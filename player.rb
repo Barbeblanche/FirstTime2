@@ -104,5 +104,12 @@ class Player
      (c.x - @x).abs < 50 and (c.y - @y).abs < 50
     end
   end
+  def collect_porte(porte)
+     # Same as in the tutorial game.
+    porte.reject! do |c|
+     (c.x - @x+50).abs < 25 and (c.y - @y+25).abs < 100
+    end
+  end
+
 
 end

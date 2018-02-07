@@ -16,10 +16,18 @@ class Window < Gosu::Window
     @item = @maps[rand(@maps.length)]
 
     @map = Map.new(@item)
+<<<<<<< HEAD
 
       @enemy = Enemy.new(@map,"oiseau")
 
     @player = Player.new(@enemy,@map, 400, 100)
+=======
+    @enemy = []
+    @player = Player.new(@map, 400, 100)
+    5.times do
+      @enemy.push(Enemy.new(@map,"oiseau"))
+    end
+>>>>>>> 8df28c9e941080d27f9d0b2822fa58f923d0b550
 
     @music = Gosu::Song.new("song/miami.mp3")
     @music.volume = 0.25
@@ -40,7 +48,7 @@ class Window < Gosu::Window
     # Scrolling follows player
     @camera_x = [[@player.x - WIDTH / 2, 0].max, @map.width * 50 - WIDTH].min
     @camera_y = [[@player.y - HEIGHT / 2, 0].max, @map.height * 50 - HEIGHT].min
-    @enemy.update
+    @enemy.each(&:update)
   end
 
   def draw
@@ -48,7 +56,7 @@ class Window < Gosu::Window
     Gosu.translate(-@camera_x, -@camera_y) do
       @map.draw
       @player.draw
-      @enemy.draw
+      @enemy.each(&:draw)
     end
 
   end

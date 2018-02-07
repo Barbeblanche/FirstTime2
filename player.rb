@@ -4,17 +4,18 @@ require 'gosu'
 class Player
   attr_reader :x, :y
   DistanceOfCollision =5
-  def initialize(oiseau,map, x, y)
+  def initialize(map, x, y)
     @x, @y = x, y
     @dir = :left
     @vy = 0 # Vertical velocity
     @map = map
-    @oiseau = oiseau
+    #@oiseau = oiseau
     # Load all animation frames
     @debout = Gosu::Image.new("image/1.png")
     @marche1 = Gosu::Image.new("image/2.png")
     @marche2 = Gosu::Image.new("image/3.png")
     @jump = Gosu::Image.new("image/saut.png")
+    @coeur = Gosu::Image.new("image/coeur.jpg")
     #@walk3d = Gosu::Image.new("media/4.png")
     #@walk4d = Gosu::Image.new("media/5.png")
     # This always points to the frame that is currently drawn.
@@ -33,6 +34,7 @@ class Player
     end
 
     @pos_cour.draw(@x + offs_x, @y-42, 0, factor, 1.0)
+    @coeur.draw(10,10,0)
   end
 
   # Could the object be placed at x + offs_x/y + offs_y without being stuck?
@@ -43,11 +45,11 @@ class Player
         not @map.solid?(@x + offs_x + 15, @y + offs_y) and
           not @map.solid?(@x + offs_x - 15, @y + offs_y) and
             not @map.solid?(@x + offs_x - 15, @y + offs_y - 45) and
-              not @map.solid?(@x + offs_x + 15, @y + offs_y - 45) and
-                 not collide?(@oiseau.x, @oiseau.y) and
-                    not collide?(@oiseau.x+36, @oiseau.y) and
-                      not collide?(@oiseau.x, @oiseau.y+30) and
-                        not collide?(@oiseau.x+36, @oiseau.y+30)
+              not @map.solid?(@x + offs_x + 15, @y + offs_y - 45) #and
+                 #not collide?(@oiseau.x, @oiseau.y) and
+                    #not collide?(@oiseau.x+36, @oiseau.y) and
+                      #not collide?(@oiseau.x, @oiseau.y+30) and
+                        #not collide?(@oiseau.x+36, @oiseau.y+30)
   end
 
 
@@ -93,16 +95,16 @@ class Player
   end
 
   def try_to_jump
-    if @map.solid?(@x, @y + 1) 
+    if @map.solid?(@x, @y + 1)
       @vy = -20 #hauteur du saut
     end
 
   end
-  def collide?(x,y)
-  distance = Gosu::distance(@x, @y,
-                            x, y)
-  distance < DistanceOfCollision
-  end
+  #def collide?(x,y)
+  #distance = Gosu::distance(@x, @y,
+  #                          x, y)
+  #distance < DistanceOfCollision
+  #end
 
   #def glissade(i)
 

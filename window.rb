@@ -16,9 +16,9 @@ class Window < Gosu::Window
     @item = @maps[rand(@maps.length)]
 
     @map = Map.new(@item)
-    2.times do
+
       @enemy = Enemy.new(@map,"oiseau")
-    end
+
     @player = Player.new(@enemy,@map, 400, 100)
 
     @music = Gosu::Song.new("song/miami.mp3")

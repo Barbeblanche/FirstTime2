@@ -15,7 +15,7 @@ class Player
     @marche1 = Gosu::Image.new("image/2.png")
     @marche2 = Gosu::Image.new("image/3.png")
     @jump = Gosu::Image.new("image/saut.png")
-    @coeur = Gosu::Image.new("image/coeur.jpg")
+  #  @coeur = Gosu::Image.new("image/coeur.jpg")
     #@walk3d = Gosu::Image.new("media/4.png")
     #@walk4d = Gosu::Image.new("media/5.png")
     # This always points to the frame that is currently drawn.
@@ -34,7 +34,7 @@ class Player
     end
 
     @pos_cour.draw(@x + offs_x, @y-42, 0, factor, 1.0)
-    @coeur.draw(10,10,0)
+    #@coeur.draw(10,10,0)
   end
 
   # Could the object be placed at x + offs_x/y + offs_y without being stuck?

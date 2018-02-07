@@ -4,14 +4,14 @@ require_relative 'player'
 require_relative 'tiles'
 require_relative 'enemy'
 require_relative 'potion'
-WIDTH, HEIGHT = 900, 480
+WIDTH, HEIGHT = 721, 1280
 class Window < Gosu::Window
 
   # constructeur de la classe Window
   def initialize(width, height)
     super WIDTH, HEIGHT
 
-    @background = Gosu::Image.new("image/sky.jpg", :tileable => true)
+    @background = Gosu::Image.new("image/sky3.jpg", :tileable => true)
     #creation d'un array pour stocker les noms des maps et faire un choix de level random
     @maps = ["maps/test.txt", "maps/test1.txt"]
     @item = @maps[rand(@maps.length)]

@@ -6,8 +6,9 @@ require_relative 'tiles'
 require_relative 'player'
 require_relative 'map'
 require_relative 'enemy'
-WindowWidth = 900
-WindowHeight = 400
+require_relative 'menu'
+WindowWidth = 721
+WindowHeight = 1280
 
 Window = Window.new(WindowWidth, WindowHeight)
 Window.show

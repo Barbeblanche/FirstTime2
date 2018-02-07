@@ -1,12 +1,14 @@
 require_relative 'enemy'
+require_relative 'potion'
 class Map
-  attr_reader :width, :height, :gems
+  attr_reader :width, :height, :potion
 
   def initialize(filename)
     # Load 60x60 tiles, 5px overlap in all four directions.
     @tileset = Gosu::Image.load_tiles("image/tile2.png", 50, 50, :tileable => true)
-    #gem_img = Gosu::Image.new("media/gem.png")
-    #@gems = []
+    potion_img = Gosu::Image.new("image/potion.png")
+    @potion = []
+
 
     lines = File.readlines(filename).map { |line| line.chomp }
     @height = lines.size
@@ -19,7 +21,7 @@ class Map
         when '#'
           Tiles::Earth
         when 'x'
-        #  @gems.push(CollectibleGem.new(gem_img, x * 50 + 25, y * 50 + 25))
+          @potion.push(Potion.new(potion_img, x * 50 + 25, y * 50 + 25))
           nil
         else
           nil
@@ -41,7 +43,8 @@ class Map
         end
       end
     end
-    #@gems.each { |c| c.draw }
+    @potion.each { |c| c.draw }
+
   end
 
   # Solid at a given pixel position?

@@ -95,18 +95,11 @@ class Player
 
   end
 
-  #def glissade(i)
+  def collect_potion(potion)
+     # Same as in the tutorial game.
+    potion.reject! do |c|
+     (c.x - @x).abs < 50 and (c.y - @y).abs < 50
+    end
+  end
 
-    #  if i == 1
-
-
-
-# end
-
-#  def collect_gems(gems)
-    # Same as in the tutorial game.
-  #  gems.reject! do |c|
-  #    (c.x - @x).abs < 50 and (c.y - @y).abs < 50
-  #  end
-#  end
 end

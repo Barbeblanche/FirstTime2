@@ -20,7 +20,7 @@ class Window < Gosu::Window
     @vie = 3
     @map = Map.new("maps/map.txt")
     @enemy = []
-    100.times do
+    50.times do
       @enemy.push(Enemy.new(@map,"oiseau"))
     end
 
@@ -51,24 +51,19 @@ class Window < Gosu::Window
 
   def draw
     @background.draw 0, 0, 0
-    #if (@rect1[0] < @rect2[0] + @rect2[2] &&
-    #   @rect1[0] + @rect1[2] >  @rect2[0] &&
-    #   @rect1[1] < @rect2[1] +  @rect2[3] &&
-    #   @rect1[3] + @rect1[1] > @rect2[1])
-    #   @vie -=1
-    #end
+    @enemy.each{|enemy| enemy.collision(@player.x,@player.y)}
     if @vie==3
-      @coeur.draw(0,0,0)
-      @coeur.draw(50,0,0)
-      @coeur.draw(100,0,0)
+      @coeur.draw(0,0,1)
+      @coeur.draw(50,0,1)
+      @coeur.draw(100,0,1)
     elsif @vie ==2
-      @coeur.draw(0,0,0)
-      @coeur.draw(50,0,0)
-      @coeurvide.draw(100,0,0)
+      @coeur.draw(0,0,1)
+      @coeur.draw(50,0,1)
+      @coeurvide.draw(100,0,1)
     elsif @vie ==1
-      @coeur.draw(0,0,0)
-      @coeurvide.draw(50,0,0)
-      @coeurvide.draw(100,0,0)
+      @coeur.draw(0,0,1)
+      @coeurvide.draw(50,0,1)
+      @coeurvide.draw(100,0,1)
     elsif @vie ==0
       close
     end

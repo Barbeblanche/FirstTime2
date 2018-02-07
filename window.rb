@@ -10,13 +10,15 @@ class Window < Gosu::Window
   def initialize(width, height)
     super WIDTH, HEIGHT
 
+    self.caption= "BeSt GaMe EvEr"
+
     @background = Gosu::Image.new("image/sky.jpg", :tileable => true)
     #creation d'un array pour stocker les noms des maps et faire un choix de level random
     @maps = ["maps/test.txt", "maps/test1.txt"]
     @item = @maps[rand(@maps.length)]
-    @coeur = Gosu::Image.new("image/coeur.png")
+    @coeur = Gosu::Image.new("image/potion.png")
     @vie = 3
-    @map = Map.new("maps/test.txt")
+    @map = Map.new("maps/test1.txt")
     @enemy = Enemy.new(@map,"oiseau")
     @player = Player.new(@map, 400, 100)
 

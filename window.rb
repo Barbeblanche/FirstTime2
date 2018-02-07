@@ -3,6 +3,7 @@ require_relative 'map'
 require_relative 'player'
 require_relative 'tiles'
 require_relative 'enemy'
+require_relative 'potion'
 WIDTH, HEIGHT = 900, 480
 class Window < Gosu::Window
 
@@ -32,14 +33,14 @@ class Window < Gosu::Window
 
   def update
     @rect1 =  [@player.x, @player.y, 40, 36]
-    @rect2 = [@enemy.x,@enemy.y,36, 30]
+    @rect2 = [@enemy.x,@enemy.y,50, 40]
     move_x = 0
     move_x -= 5 if Gosu.button_down? Gosu::KB_LEFT
     move_x += 5 if Gosu.button_down? Gosu::KB_RIGHT
     #i = 1 if Gosu.button_down? Gosu::KB_DOWN
 
     @player.update(move_x)
-  #  @cptn.collect_gems(@map.gems)
+    @player.collect_potion(@map.potion)
     # Scrolling follows player
     @camera_x = [[@player.x - WIDTH / 2, 0].max, @map.width * 50 - WIDTH].min
     @camera_y = [[@player.y - HEIGHT / 2, 0].max, @map.height * 50 - HEIGHT].min
@@ -48,7 +49,12 @@ class Window < Gosu::Window
 
   def draw
     @background.draw 0, 0, 0
-
+    if (@rect1[0] < @rect2[0] + @rect2[2] &&
+       @rect1[0] + @rect1[2] >  @rect2[0] &&
+       @rect1[1] < @rect2[1] +  @rect2[3] &&
+       @rect1[3] + @rect1[1] > @rect2[1])
+       @vie -=1
+    end
     if @vie==3
       @coeur.draw(0,0,0)
       @coeur.draw(50,0,0)
@@ -76,7 +82,7 @@ class Window < Gosu::Window
     case id
     when Gosu::KB_SPACE
       @player.try_to_jump
-      end
+
     when Gosu::KB_ESCAPE
       close
     else

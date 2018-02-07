@@ -15,8 +15,7 @@ class Window < Gosu::Window
     #creation d'un array pour stocker les noms des maps et faire un choix de level random
     @maps = ["maps/test.txt", "maps/test1.txt"]
     @item = @maps[rand(@maps.length)]
-    @coeur = Gosu::Image.new("image/coeurplein.png")
-    @coeurvide = Gosu::Image.new("image/coeur.png")
+    @coeur = Gosu::Image.new("image/potion.png")
     @vie = 3
     @map = Map.new("maps/map.txt")
     @enemy = []
@@ -26,7 +25,7 @@ class Window < Gosu::Window
 
     @player = Player.new(@map, 100, 99*50-1)
 
-    @test = "p"
+
     @music = Gosu::Song.new("song/miami.mp3")
     @music.volume = 0.25
     @music.play(true)
@@ -36,15 +35,13 @@ class Window < Gosu::Window
   end
 
   def update
-    #@rect1 =  [@player.x, @player.y, 40, 36]
-    #@rect2 = [@enemy.each(&:x),@enemy.each(&:y),50, 40]
     move_x = 0
     move_x -= 5 if Gosu.button_down? Gosu::KB_LEFT
     move_x += 5 if Gosu.button_down? Gosu::KB_RIGHT
     #i = 1 if Gosu.button_down? Gosu::KB_DOWN
 
     @player.update(move_x)
-    @player.collect_potion(@map.potion)
+  #  @cptn.collect_gems(@map.gems)
     # Scrolling follows player
     @camera_x = [[@player.x - WIDTH / 2, 0].max, @map.width * 50 - WIDTH].min
     @camera_y = [[@player.y - HEIGHT / 2, 0].max, @map.height * 50 - HEIGHT].min
@@ -66,11 +63,8 @@ class Window < Gosu::Window
     elsif @vie ==2
       @coeur.draw(0,0,0)
       @coeur.draw(50,0,0)
-      @coeurvide.draw(100,0,0)
     elsif @vie ==1
       @coeur.draw(0,0,0)
-      @coeurvide.draw(50,0,0)
-      @coeurvide.draw(100,0,0)
     elsif @vie ==0
       close
     end
@@ -82,7 +76,6 @@ class Window < Gosu::Window
 
   end
   def button_down(id)
-
     case id
     when Gosu::KB_SPACE
       @player.try_to_jump

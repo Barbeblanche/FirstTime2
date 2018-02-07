@@ -14,15 +14,9 @@ class Window < Gosu::Window
     #creation d'un array pour stocker les noms des maps et faire un choix de level random
     @maps = ["maps/test.txt", "maps/test1.txt"]
     @item = @maps[rand(@maps.length)]
-<<<<<<< HEAD
-
-    @map= Map.new("maps/test1.txt")
-    #@map = Map.new(@item)
-=======
     @coeur = Gosu::Image.new("image/coeur.png")
     @vie = 2
     @map = Map.new(@item)
->>>>>>> ca3478d9f3ac674c3eaac0d82ca4d271d7be2e2a
     @enemy = []
     @player = Player.new(@map, 400, 100)
     5.times do

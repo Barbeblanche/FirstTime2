@@ -10,6 +10,8 @@ class Menu< Gosu::Window
     @btncommandes = Gosu::Image.new("image/btncommandes.png")
     @btncredits = Gosu::Image.new("image/btncredits.png")
     @cursor = Gosu::Image.new(self, 'image/curs.png')
+    @rect1 = [250,480,250,60]
+    @rect2 = [130,570,580,90]
   end
 
 
@@ -21,6 +23,6 @@ class Menu< Gosu::Window
    def draw
      @background.draw 0,0,1
      @background1.draw 0,0,0
-    @cursor.draw self.mouse_x, self.mouse_y, 1
+     @cursor.draw self.mouse_x, self.mouse_y, 1
   end
 end

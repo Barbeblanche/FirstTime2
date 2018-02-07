@@ -2,13 +2,14 @@ require_relative 'map'
 require 'gosu'
 
 class Player
-  attr_reader :x, :y
+  attr_accessor :x, :y, :vie
   DistanceOfCollision =5
   def initialize(map, x, y)
     @x, @y = x, y
     @dir = :left
     @vy = 0 # Vertical velocity
     @map = map
+    @vie = 3
     #@oiseau = oiseau
     # Load all animation frames
     @debout = Gosu::Image.new("image/1.png")
@@ -21,7 +22,9 @@ class Player
     # This is set in update, and used in draw.
     @pos_cour = @debout
   end
-
+  def set_vie(vie)
+    @vie = vie
+  end
   def draw
     # Flip vertically when facing to the left.
     if @dir == :left

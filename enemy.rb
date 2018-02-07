@@ -1,14 +1,16 @@
+require_relative 'player'
 class Enemy
-  attr_reader :x, :y
-  def initialize(map,type)
+  attr_accessor :x, :y, :vie
+  TPS = 500
+  def initialize(map,type,player)
     @velocity = Gosu::random(3.5, 5.0)
-
+    @tps_ecoule = 0
     @map = map
-
+    @vie = 3
+    @player = player
     @image = Gosu::Image.new("image/o1.png")
     @oiseau2 = Gosu::Image.new("image/o2.png")
     @oiseau3 = Gosu::Image.new("image/o3.png")
-
     @oiseau2r = Gosu::Image.new("image/o2r.png")
     @oiseau3r = Gosu::Image.new("image/o3r.png")
     @test = "droit"
@@ -41,7 +43,11 @@ class Enemy
      @rect1[0] + @rect1[2] >  @rect2[0] and
      @rect1[1] < @rect2[1] +  @rect2[3] and
      @rect1[3] + @rect1[1] > @rect2[1])
-     @vie -=1
+     if Gosu.milliseconds-@tps_ecoule >= TPS
+       @vie -=1
+       @player.set_vie(@vie)
+       @tps_ecoule = Gosu.milliseconds
+     end
   end
  end
 end

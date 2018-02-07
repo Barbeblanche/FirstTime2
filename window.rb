@@ -17,14 +17,14 @@ class Window < Gosu::Window
     @item = @maps[rand(@maps.length)]
     @coeur = Gosu::Image.new("image/coeurplein.png")
     @coeurvide = Gosu::Image.new("image/coeur.png")
-    @vie = 3
     @map = Map.new("maps/map.txt")
+    @player = Player.new(@map, 100, 99*50-1)
     @enemy = []
     50.times do
-      @enemy.push(Enemy.new(@map,"oiseau"))
+      @enemy.push(Enemy.new(@map,"oiseau",@player))
     end
 
-    @player = Player.new(@map, 100, 99*50-1)
+
 
 
     @music = Gosu::Song.new("song/miami.mp3")
@@ -52,19 +52,19 @@ class Window < Gosu::Window
   def draw
     @background.draw 0, 0, 0
     @enemy.each{|enemy| enemy.collision(@player.x,@player.y)}
-    if @vie==3
+    if @player.vie==3
       @coeur.draw(0,0,1)
       @coeur.draw(50,0,1)
       @coeur.draw(100,0,1)
-    elsif @vie ==2
+    elsif @player.vie ==2
       @coeur.draw(0,0,1)
       @coeur.draw(50,0,1)
       @coeurvide.draw(100,0,1)
-    elsif @vie ==1
+    elsif @player.vie ==1
       @coeur.draw(0,0,1)
       @coeurvide.draw(50,0,1)
       @coeurvide.draw(100,0,1)
-    elsif @vie ==0
+    elsif @player.vie ==0
       close
     end
     Gosu.translate(-@camera_x, -@camera_y) do

@@ -16,18 +16,11 @@ class Window < Gosu::Window
     @item = @maps[rand(@maps.length)]
 
     @map = Map.new(@item)
-<<<<<<< HEAD
-
-      @enemy = Enemy.new(@map,"oiseau")
-
-    @player = Player.new(@enemy,@map, 400, 100)
-=======
     @enemy = []
     @player = Player.new(@map, 400, 100)
     5.times do
       @enemy.push(Enemy.new(@map,"oiseau"))
     end
->>>>>>> 8df28c9e941080d27f9d0b2822fa58f923d0b550
 
     @music = Gosu::Song.new("song/miami.mp3")
     @music.volume = 0.25

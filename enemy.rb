@@ -33,7 +33,6 @@ class Enemy
   end
   def draw
     @pos_cour.draw(@x, @y,1.0,1.0)
-    #@pos_cour.draw_rect(@x, @y, width, height, c, z = 0, mode = :default)
   end
 
 end

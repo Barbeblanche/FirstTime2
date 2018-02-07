@@ -15,7 +15,6 @@ class Player
     @marche1 = Gosu::Image.new("image/2.png")
     @marche2 = Gosu::Image.new("image/3.png")
     @jump = Gosu::Image.new("image/saut.png")
-  #  @coeur = Gosu::Image.new("image/coeur.jpg")
     #@walk3d = Gosu::Image.new("media/4.png")
     #@walk4d = Gosu::Image.new("media/5.png")
     # This always points to the frame that is currently drawn.
@@ -34,7 +33,6 @@ class Player
     end
 
     @pos_cour.draw(@x + offs_x, @y-42, 0, factor, 1.0)
-    #@coeur.draw(10,10,0)
   end
 
   # Could the object be placed at x + offs_x/y + offs_y without being stuck?
@@ -46,10 +44,6 @@ class Player
           not @map.solid?(@x + offs_x - 15, @y + offs_y) and
             not @map.solid?(@x + offs_x - 15, @y + offs_y - 45) and
               not @map.solid?(@x + offs_x + 15, @y + offs_y - 45) #and
-                 #not collide?(@oiseau.x, @oiseau.y) and
-                    #not collide?(@oiseau.x+36, @oiseau.y) and
-                      #not collide?(@oiseau.x, @oiseau.y+30) and
-                        #not collide?(@oiseau.x+36, @oiseau.y+30)
   end
 
 
@@ -100,11 +94,6 @@ class Player
     end
 
   end
-  #def collide?(x,y)
-  #distance = Gosu::distance(@x, @y,
-  #                          x, y)
-  #distance < DistanceOfCollision
-  #end
 
   #def glissade(i)
 

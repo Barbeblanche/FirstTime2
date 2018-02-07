@@ -39,6 +39,10 @@ class Window < Gosu::Window
     @camera_x = @camera_y = 0
   end
 
+  def needs_cursor?
+  true
+end
+
   def update
     move_x = 0
     move_x -= 5 if Gosu.button_down? Gosu::KB_LEFT

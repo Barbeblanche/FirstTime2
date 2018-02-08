@@ -1,14 +1,14 @@
 require_relative 'bouton'
 require_relative 'window'
 class Quit< Gosu::Window
-  def initialize(widht, height,window)
+  def initialize(widht, height)
     super WIDTH, HEIGHT
 
     self.caption = "Retro Climber"
     @x=widht
     @y=height
     @background = Gosu::Image.new("image/sky3.jpg", :tileable => true)
-    @window = window
+    @window =  Window.new(WIDTH, HEIGHT)
     @quitoupas = Gosu::Image.new("image/quitoupas.png")
     @btnretour = Gosu::Image.new("image/btnretour.png")
     @btnmenu = Gosu::Image.new("image/btnmp.png")

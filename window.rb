@@ -22,7 +22,7 @@ class Window < Gosu::Window
     @item = @maps[rand(@maps.length)]
     @coeur = Gosu::Image.new("image/coeurplein.png")
     @coeurvide = Gosu::Image.new("image/coeur.png")
-    @map = Map.new("maps/map.txt")
+    @map = Map.new("maps/map3.txt")
     @player = Player.new(@map, 100, 99*50-1)
     @enemy = []
     @window = self
@@ -58,7 +58,8 @@ class Window < Gosu::Window
     @camera_x = [[@player.x - WIDTH / 2, 0].max, @map.width * 50 - WIDTH].min
     @camera_y = [[@player.y - HEIGHT / 2, 0].max, @map.height * 50 - HEIGHT].min
     @enemy.each(&:update)
-    if @player.vie ==0
+    if @player.vie == 0
+      close!
       @fin = Fin.new(WIDTH,HEIGHT)
       @fin.show
     end
@@ -68,7 +69,7 @@ class Window < Gosu::Window
 
     @background.draw 0, 0, 0
     if @map.porte.length == 0
-      close
+      close!
     end
     if @map.potion.length == @i
       @nbPotion -=1
@@ -108,7 +109,7 @@ class Window < Gosu::Window
       @player.try_to_jump
 
     when Gosu::KB_ESCAPE
-      @quitter = Quit.new(WIDTH,HEIGHT,@window)
+      @quitter = Quit.new(WIDTH,HEIGHT)
       @quitter.show
     else
       super

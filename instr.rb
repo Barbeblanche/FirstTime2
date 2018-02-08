@@ -1,13 +1,13 @@
 require_relative 'bouton'
 require_relative 'window'
+require_relative 'menu'
 class Instr< Gosu::Window
-  def initialize(widht, height,window)
+  def initialize(widht, height)
     super WIDTH, HEIGHT
     @x=widht
     @y=height
-    @window = window
     @background = Gosu::Image.new("image/instr.png", :tileable => true)
-
+    @menu = Menu.new(WindowWidth, WindowHeight)
     @btnquitter = Gosu::Image.new("image/btnquitter.png")
     @btnquitter2 = Gosu::Image.new("image/quitterclic.png")
 
@@ -23,13 +23,14 @@ class Instr< Gosu::Window
             when (1180..1260)
               @bout4 = Bouton.new(@btnquitter2,220,1180,290,80)
               if button_down?(Gosu::MsLeft)
-                close
+                close!
+                @menu = Menu.new(WIDTH, HEIGHT)
+                @menu.show
               end
             else
               @bout4 = Bouton.new(@btnquitter,220,1180,290,80)
             end
           end
-
           close if Gosu.button_down? Gosu::KB_ESCAPE
    end
    def needs_cursor?

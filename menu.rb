@@ -31,8 +31,8 @@ class Menu< Gosu::Window
          when (480..540)
            @bout1 = Bouton.new(@btnjouer2,250,480,250,60)
            if button_down?(Gosu::MsLeft)
-             close!
              @window.show
+             close!
            end
          else
            @bout1 = Bouton.new(@btnjouer,250,480,250,60)
@@ -44,7 +44,8 @@ class Menu< Gosu::Window
           when (580..670)
             @bout2 = Bouton.new(@btncommandes2,130,580,580,90)
             if button_down?(Gosu::MsLeft)
-              @instr = Instr.new(WIDTH,HEIGHT,Menu)
+              close!
+              @instr = Instr.new(WIDTH,HEIGHT)
               @instr.show
             end
           else
@@ -57,6 +58,7 @@ class Menu< Gosu::Window
            when (680..750)
              @bout3 = Bouton.new(@btncredits2,220,680,290,70)
              if button_down?(Gosu::MsLeft)
+               close!
              end
            else
              @bout3 = Bouton.new(@btncredits,220,680,290,70)

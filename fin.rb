@@ -26,7 +26,6 @@ class Fin < Gosu::Window
         when (500..567)
          @bout1 = Bouton.new(@rejouer2,207,500,309,67)
           if button_down?(Gosu::MsLeft)
-           close!
            @window.show
           end
         else

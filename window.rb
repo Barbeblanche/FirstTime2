@@ -50,12 +50,12 @@ class Window < Gosu::Window
 
     @player.update(move_x)
     @player.collect_potion(@map.potion)
+
     if @map.clef.length == 0
       @player.collect_porte(@map.porte)
-      close!
-      @fin = Fin.new(WIDTH,HEIGHT)
-      @fin.show
     end
+
+
     if @i2 == 1
       @bruit_fiole.play(1,1,false)
       @i2 -= 1
@@ -71,6 +71,13 @@ class Window < Gosu::Window
       @fin = Fin.new(WIDTH,HEIGHT)
       @fin.show
     end
+
+    if @map.porte.length == 0
+	     close!
+	      @fin = Fin.new(WIDTH,HEIGHT)
+	       @fin.show
+    end
+
   end
 
   def draw

@@ -19,10 +19,13 @@ class Enemy
     @pos_cour = @image
     @size_x = 36
     @size_y = 30
-    if @map.solid?(@x, @y)
-      @x = Gosu::random(51.0,849.0)
-      @y = Gosu::random(51.0,4900.0)
+    for i in -36..36
+        if @map.solid?(@x+i, @y+i)||@map.solid?(@x+i,@y) ||@map.solid?(@x,@y+i)||@map.solid?(@x-i,@y+i) ||@map.solid?(@x+i,@y-i)
+          @x = Gosu::random(51.0,849.0)
+          @y = Gosu::random(51.0,4500.0)
+        end
     end
+
   end
 
   def update

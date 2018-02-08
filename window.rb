@@ -32,7 +32,7 @@ class Window < Gosu::Window
 
 
     @music = Gosu::Song.new("song/miami.mp3")
-    @music.volume = 0.25
+    @music.volume = 1
     @music.play(true)
 
     # The scrolling position is stored as top left corner of the screen.

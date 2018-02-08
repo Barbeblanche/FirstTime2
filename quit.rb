@@ -17,7 +17,6 @@ class Quit< Gosu::Window
     @btnmenu2 = Gosu::Image.new("image/btnmpclic.png")
     @btnquitter2 = Gosu::Image.new("image/quitterclic.png")
 
-    #@cursor = Gosu::Image.new(self, 'image/curs.png')
     @quitoupas = Bouton.new(@quitoupas,180,270,365,60)
     @bout1 = Bouton.new(@rejouer,207,500,309,67)
     @bout2 = Bouton.new(@btnquitter,220,600,290,70)
@@ -77,6 +76,5 @@ class Quit< Gosu::Window
      @bout2.draw
      @bout3.draw
      @quitoupas.draw
-     #@cursor.draw self.mouse_x, self.mouse_y, 1
   end
 end

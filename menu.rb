@@ -91,6 +91,5 @@ class Menu< Gosu::Window
      @bout2.draw
      @bout3.draw
      @bout4.draw
-     #@cursor.draw self.mouse_x, self.mouse_y, 1
   end
 end

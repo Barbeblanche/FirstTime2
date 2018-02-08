@@ -40,6 +40,6 @@ class Instr< Gosu::Window
      @background.draw 0,0,0
 
      @bout4.draw
-     #@cursor.draw self.mouse_x, self.mouse_y, 1
+     
   end
 end

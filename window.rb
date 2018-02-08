@@ -37,8 +37,6 @@ class Window < Gosu::Window
     @i2 = 0
     @bruit_fiole = Gosu::Sample.new('song/bruit_fiole.wav')
 
-
-    # The scrolling position is stored as top left corner of the screen.
     @camera_x = @camera_y = 0
   end
 
@@ -48,7 +46,6 @@ class Window < Gosu::Window
     move_x = 0
     move_x -= 5 if Gosu.button_down? Gosu::KB_LEFT
     move_x += 5 if Gosu.button_down? Gosu::KB_RIGHT
-    #i = 1 if Gosu.button_down? Gosu::KB_DOWN
 
 
     @player.update(move_x)

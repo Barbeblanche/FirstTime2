@@ -15,7 +15,6 @@ class Window < Gosu::Window
   # constructeur de la classe Window
   def initialize(width, height)
     super WIDTH, HEIGHT
-
     @background = Gosu::Image.new("image/sky3.jpg", :tileable => true)
     #creation d'un array pour stocker les noms des maps et faire un choix de level random
     @maps = ["maps/test.txt", "maps/test1.txt"]
@@ -108,7 +107,7 @@ class Window < Gosu::Window
       @player.try_to_jump
 
     when Gosu::KB_ESCAPE
-      @menuquit = Quit.new(WIDTH,HEIGHT,Menu)
+      @menuquit = Quit.new(WIDTH,HEIGHT,@jeu)
       @menuquit.show if Gosu.button_down? Gosu::KB_ESCAPE
     else
       super

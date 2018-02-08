@@ -18,7 +18,7 @@ class Window < Gosu::Window
     self.caption = "Retro Climber"
     @background = Gosu::Image.new("image/sky3.jpg", :tileable => true)
     #creation d'un array pour stocker les noms des maps et faire un choix de level random
-    @maps = ["maps/map.txt","maps/map1.txt","maps/map2.txt","maps/map3.txt","maps/mapT.txt","maps/test.txt", "maps/test1.txt"]
+    @maps = ["maps/map.txt","maps/map1.txt","maps/map2.txt","maps/map3.txt","maps/mapT.txt", "maps/test1.txt"]
     @item = @maps[rand(@maps.length)]
     @coeur = Gosu::Image.new("image/coeurplein.png")
     @coeurvide = Gosu::Image.new("image/coeur.png")

@@ -47,7 +47,7 @@ class Quit< Gosu::Window
           when (600..670)
             @bout2 = Bouton.new(@btnquitter2,220,600,290,70)
             if button_down?(Gosu::MsLeft)
-              close
+              abort("Fin du jeu")
             end
 
           else

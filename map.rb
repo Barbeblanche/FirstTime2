@@ -29,7 +29,7 @@ class Map
           nil
         when 'p'
          @porte.push(Porte.new(@porte_img, x * 50 + 25, y * 50 ))
-         puts "testporte"
+         
          nil
        when 'c'
         @clef.push(Clef.new(@clef_img, x *50+20, y *50+10))

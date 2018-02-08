@@ -16,8 +16,6 @@ class Menu< Gosu::Window
     @btncommandes2 = Gosu::Image.new("image/commandesclic.png")
     @btncredits2 = Gosu::Image.new("image/creditsclic.png")
     @btnquitter2 = Gosu::Image.new("image/quitterclic.png")
-
-    @cursor = Gosu::Image.new(self, 'image/curs.png')
     @bout1 = Bouton.new(@btnjouer,250,480,250,60)
     @bout2 = Bouton.new(@btncommandes,130,580,580,90)
     @bout3 = Bouton.new(@btncredits,220,680,290,70)

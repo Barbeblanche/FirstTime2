@@ -34,7 +34,6 @@ class Window < Gosu::Window
 
 
     @jeu=self
-
     @music = Gosu::Song.new("song/miami.mp3")
     @music.volume = 1
     @music.play(true)
@@ -80,7 +79,7 @@ class Window < Gosu::Window
       @player.set_vie(3)
       @i -= 1
     elsif @nbPotion == @i && @player.vie == 1
-       @player.set_vie(2)
+      @player.set_vie(2)
       @i -= 1
     end
     @enemy.each{|enemy| enemy.collision(@player.x,@player.y)}
@@ -113,7 +112,7 @@ class Window < Gosu::Window
 
     when Gosu::KB_ESCAPE
       @menuquit = Quit.new(WIDTH,HEIGHT,@jeu)
-      @menuquit.show if Gosu.button_down? Gosu::KB_ESCAPE
+      @menuquit.show
     else
       super
     end

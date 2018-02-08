@@ -7,6 +7,7 @@ require_relative 'potion'
 require_relative 'porte'
 require_relative 'quit'
 require_relative 'menu'
+require_relative 'clef'
 WIDTH, HEIGHT = 721, 1280
 class Window < Gosu::Window
 
@@ -21,7 +22,7 @@ class Window < Gosu::Window
     @item = @maps[rand(@maps.length)]
     @coeur = Gosu::Image.new("image/coeurplein.png")
     @coeurvide = Gosu::Image.new("image/coeur.png")
-    @map = Map.new("maps/test1.txt")
+    @map = Map.new("maps/map.txt")
     @player = Player.new(@map, 100, 99*50-1)
     @enemy = []
     @i = @map.potion.length - 1
@@ -53,7 +54,11 @@ class Window < Gosu::Window
 
     @player.update(move_x)
     @player.collect_potion(@map.potion)
-    @player.collect_porte(@map.porte)
+    if @map.clef.length == 0
+      @player.collect_porte(@map.porte)
+    end
+    @player.collect_clef(@map.clef)
+
 
     @camera_x = [[@player.x - WIDTH / 2, 0].max, @map.width * 50 - WIDTH].min
     @camera_y = [[@player.y - HEIGHT / 2, 0].max, @map.height * 50 - HEIGHT].min

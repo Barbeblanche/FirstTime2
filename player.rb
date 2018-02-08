@@ -1,6 +1,6 @@
 require_relative 'map'
 require 'gosu'
-
+require_relative 'clef'
 class Player
   attr_accessor :x, :y, :vie
   DistanceOfCollision =5
@@ -35,7 +35,7 @@ class Player
       factor = -1.0
     end
 
-    @pos_cour.draw(@x + offs_x, @y-42, 0, factor, 1.0)
+    @pos_cour.draw(@x + offs_x, @y-42, 2, factor, 1.0)
   end
 
   # Could the object be placed at x + offs_x/y + offs_y without being stuck?
@@ -92,10 +92,9 @@ class Player
   end
 
   def try_to_jump
-    if @map.solid?(@x, @y + 1)
+    if @map.solid?(@x+8, @y + 1) || @map.solid?(@x-8, @y + 1)
       @vy = -20 #hauteur du saut
     end
-
   end
 
   def collect_potion(potion)
@@ -109,7 +108,14 @@ class Player
     porte.reject! do |c|
      (c.x - @x+50).abs < 25 and (c.y - @y+25).abs < 100
     end
+
   end
+  def collect_clef(clef)
+       # Same as in the tutorial game.
+      clef.reject! do |c|
+       (c.x - @x).abs < 50 and (c.y - @y).abs < 50
+      end
+    end
 
 
 end

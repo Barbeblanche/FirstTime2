@@ -1,8 +1,9 @@
 require_relative 'enemy'
 require_relative 'potion'
 require_relative 'porte'
+require_relative 'clef'
 class Map
-  attr_reader :width, :height, :potion, :porte
+  attr_reader :width, :height, :potion, :porte, :clef
 
   def initialize(filename)
     # Load 60x60 tiles, 5px overlap in all four directions.
@@ -10,7 +11,8 @@ class Map
     @potion_img = Gosu::Image.new("image/potion.png")
     @porte_img = Gosu::Image.new("image/porte.png")
     @potion = []
-
+    @clef_img = Gosu::Image.new("image/clef.png")
+    @clef = []
     @porte = []
     lines = File.readlines(filename).map { |line| line.chomp }
     @height = lines.size
@@ -26,9 +28,12 @@ class Map
           @potion.push(Potion.new(@potion_img, x * 50 + 25, y * 50 + 25))
           nil
         when 'p'
-         @porte.push(Porte.new(@porte_img, x * 50 + 25, y * 50 + 25))
+         @porte.push(Porte.new(@porte_img, x * 50 + 25, y * 50 ))
          puts "testporte"
          nil
+       when 'c'
+        @clef.push(Clef.new(@clef_img, x *50+20, y *50+10))
+        nil
         else
           nil
         end
@@ -51,6 +56,8 @@ class Map
     end
     @potion.each { |c| c.draw }
     @porte.each { |c| c.draw }
+    @clef.each { |c| c.draw }
+
 
   end
 

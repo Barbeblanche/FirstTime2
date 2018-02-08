@@ -2,11 +2,12 @@ require_relative 'bouton'
 require_relative 'window'
 require_relative 'instr'
 class Menu< Gosu::Window
-  def initialize(widht, height,window)
+  def initialize(widht, height)
     super WIDTH, HEIGHT
     @x=widht
     @y=height
-    @window = window
+    self.caption = "Retro Climber"
+    @window = Window.new(WIDTH, HEIGHT)
     @background = Gosu::Image.new("image/sky3.jpg", :tileable => true)
     @btnjouer = Gosu::Image.new("image/btnjouer.png")
     @btncommandes = Gosu::Image.new("image/btncommandes.png")
@@ -67,7 +68,8 @@ class Menu< Gosu::Window
             when (780..860)
               @bout4 = Bouton.new(@btnquitter2,220,780,290,80)
               if button_down?(Gosu::MsLeft)
-                close
+                close!
+                abort("Fin du jeu")
               end
             else
               @bout4 = Bouton.new(@btnquitter,220,780,290,80)

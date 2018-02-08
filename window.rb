@@ -8,14 +8,14 @@ require_relative 'porte'
 require_relative 'quit'
 require_relative 'menu'
 require_relative 'clef'
+require_relative 'fin'
 WIDTH, HEIGHT = 721, 1280
 class Window < Gosu::Window
-
-  attr_accessor :jeu
 
   # constructeur de la classe Window
   def initialize(width, height)
     super WIDTH, HEIGHT
+    self.caption = "Retro Climber"
     @background = Gosu::Image.new("image/sky3.jpg", :tileable => true)
     #creation d'un array pour stocker les noms des maps et faire un choix de level random
     @maps = ["maps/test.txt", "maps/test1.txt"]
@@ -25,15 +25,12 @@ class Window < Gosu::Window
     @map = Map.new("maps/map.txt")
     @player = Player.new(@map, 100, 99*50-1)
     @enemy = []
+    @window = self
     @i = @map.potion.length - 1
     @nbPotion = @map.potion.length
-
     20.times do
       @enemy.push(Enemy.new(@map,"oiseau",@player))
     end
-
-
-    @jeu=self
     @music = Gosu::Song.new("song/miami.mp3")
     @music.volume = 1
     @music.play(true)
@@ -58,10 +55,13 @@ class Window < Gosu::Window
     end
     @player.collect_clef(@map.clef)
 
-
     @camera_x = [[@player.x - WIDTH / 2, 0].max, @map.width * 50 - WIDTH].min
     @camera_y = [[@player.y - HEIGHT / 2, 0].max, @map.height * 50 - HEIGHT].min
     @enemy.each(&:update)
+    if @player.vie ==0
+      @fin = Fin.new(WIDTH,HEIGHT)
+      @fin.show
+    end
   end
 
   def draw
@@ -95,15 +95,12 @@ class Window < Gosu::Window
       @coeur.draw(0,0,1)
       @coeurvide.draw(50,0,1)
       @coeurvide.draw(100,0,1)
-    elsif @player.vie ==0
-      close
     end
     Gosu.translate(-@camera_x, -@camera_y) do
       @map.draw
       @player.draw
       @enemy.each(&:draw)
     end
-
   end
   def button_down(id)
     case id
@@ -111,8 +108,8 @@ class Window < Gosu::Window
       @player.try_to_jump
 
     when Gosu::KB_ESCAPE
-      @menuquit = Quit.new(WIDTH,HEIGHT,@jeu)
-      @menuquit.show
+      @quitter = Quit.new(WIDTH,HEIGHT,@window)
+      @quitter.show
     else
       super
     end

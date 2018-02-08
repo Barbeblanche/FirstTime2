@@ -1,15 +1,14 @@
 require_relative 'bouton'
 require_relative 'window'
-
 class Quit< Gosu::Window
   def initialize(widht, height,window)
     super WIDTH, HEIGHT
-    self.caption = "Menu quit"
+
+    self.caption = "Retro Climber"
     @x=widht
     @y=height
-    @window= window
     @background = Gosu::Image.new("image/sky3.jpg", :tileable => true)
-
+    @window = window
     @quitoupas = Gosu::Image.new("image/quitoupas.png")
     @btnretour = Gosu::Image.new("image/btnretour.png")
     @btnmenu = Gosu::Image.new("image/btnmp.png")
@@ -47,6 +46,7 @@ class Quit< Gosu::Window
           when (600..670)
             @bout2 = Bouton.new(@btnquitter2,220,600,290,70)
             if button_down?(Gosu::MsLeft)
+              close!
               abort("Fin du jeu")
             end
 
@@ -61,6 +61,8 @@ class Quit< Gosu::Window
              @bout3 = Bouton.new(@btnmenu2,90,710,550,70)
              if button_down?(Gosu::MsLeft)
                close!
+               @menu = Menu.new(WindowWidth, WindowHeight)
+               @menu.show
              end
            else
              @bout3 = Bouton.new(@btnmenu,90,710,550,70)

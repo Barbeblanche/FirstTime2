@@ -12,6 +12,7 @@ class Enemy
     @oiseau3 = Gosu::Image.new("image/o3.png")
     @oiseau2r = Gosu::Image.new("image/o2r.png")
     @oiseau3r = Gosu::Image.new("image/o3r.png")
+    @bruit_hit = Gosu::Sample.new('song/bruit_hit.wav')
     @test = "droit"
     @x = Gosu::random(51.0,849.0)
     @y = Gosu::random(51.0,4900.0)
@@ -40,7 +41,7 @@ class Enemy
     @pos_cour.draw(@x, @y,1.0,1.0)
   end
   def collision(x,y)
-  @rect1 = [x,y,40,36]
+    @rect1 = [x,y-15,36,36]
   @rect2 = [@x+(@size_x/2),@y+(@size_y/2),@size_x,@size_y]
   if (@rect1[0] < @rect2[0] + @rect2[2] and
      @rect1[0] + @rect1[2] >  @rect2[0] and
@@ -49,6 +50,7 @@ class Enemy
      if Gosu.milliseconds-@tps_ecoule >= TPS
        @player.vie -=1
        @player.set_vie(@player.vie)
+       @bruit_hit.play(1,1,false)
        @tps_ecoule = Gosu.milliseconds
      end
   end

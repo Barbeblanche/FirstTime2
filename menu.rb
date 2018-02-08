@@ -1,6 +1,7 @@
 require_relative 'bouton'
 require_relative 'window'
 require_relative 'instr'
+require_relative 'credit'
 class Menu< Gosu::Window
   def initialize(widht, height)
     super WIDTH, HEIGHT
@@ -58,7 +59,8 @@ class Menu< Gosu::Window
            when (680..750)
              @bout3 = Bouton.new(@btncredits2,220,680,290,70)
              if button_down?(Gosu::MsLeft)
-               close!
+               @credit = Credit.new(WIDTH, HEIGHT)
+               @credit.show
              end
            else
              @bout3 = Bouton.new(@btncredits,220,680,290,70)

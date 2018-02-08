@@ -22,7 +22,7 @@ class Window < Gosu::Window
     @item = @maps[rand(@maps.length)]
     @coeur = Gosu::Image.new("image/coeurplein.png")
     @coeurvide = Gosu::Image.new("image/coeur.png")
-    @map = Map.new("maps/map3.txt")
+    @map = Map.new("maps/map2.txt")
     @player = Player.new(@map, 100, 99*50-1)
     @enemy = []
     @window = self
@@ -34,6 +34,9 @@ class Window < Gosu::Window
     @music = Gosu::Song.new("song/miami.mp3")
     @music.volume = 1
     @music.play(true)
+    @i2 = 0
+    @bruit_fiole = Gosu::Sample.new('song/bruit_fiole.wav')
+
 
     # The scrolling position is stored as top left corner of the screen.
     @camera_x = @camera_y = 0
@@ -52,7 +55,15 @@ class Window < Gosu::Window
     @player.collect_potion(@map.potion)
     if @map.clef.length == 0
       @player.collect_porte(@map.porte)
+      close!
+      @fin = Fin.new(WIDTH,HEIGHT)
+      @fin.show
     end
+    if @i2 == 1
+      @bruit_fiole.play(1,1,false)
+      @i2 -= 1
+    end
+
     @player.collect_clef(@map.clef)
 
     @camera_x = [[@player.x - WIDTH / 2, 0].max, @map.width * 50 - WIDTH].min
@@ -76,12 +87,15 @@ class Window < Gosu::Window
     end
     if @nbPotion == @i && @player.vie == 3
       @i -= 1
+      @i2 += 1
     elsif @nbPotion == @i && @player.vie == 2
       @player.set_vie(3)
       @i -= 1
+      @i2 += 1
     elsif @nbPotion == @i && @player.vie == 1
       @player.set_vie(2)
       @i -= 1
+      @i2 += 1
     end
     @enemy.each{|enemy| enemy.collision(@player.x,@player.y)}
     if @player.vie==3
